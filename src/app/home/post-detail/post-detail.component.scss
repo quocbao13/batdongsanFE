@@ -1,0 +1,27 @@
+.miniImg {
+  border: 1px solid black;
+  background: #aaaaaa;
+}
+.showListFile {
+  overflow-x: auto
+}
+/* width */
+.showListFile::-webkit-scrollbar {
+  width: 5px;
+  height: 7px;
+}
+
+/* Track */
+.showListFile::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.showListFile::-webkit-scrollbar-thumb {
+  background: rgba(0, 86, 179, 0.60);
+}
+
+/* Handle on hover */
+.showListFile::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+}

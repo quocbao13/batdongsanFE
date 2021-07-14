@@ -1,0 +1,28 @@
+<nav id="sidebar" class="active" style="height: 100vh;" [ngStyle]="{'margin-left' : showHideMenuLeft ? '-270px' : '0'}">
+  <div class="custom-menu" style="z-index: 1000;" [ngStyle]="{'margin-right' : !showHideMenuLeft ? '10px' : '-50px'}">
+    <button type="button" id="sidebarCollapse" class="btn btn-primary" (click)="showHideMenu()">
+      <i class="fa " [ngClass]="{'fa-times' : !showHideMenuLeft, 'fa-bars' : showHideMenuLeft}"></i>
+    </button>
+  </div>
+  <div class="p-4">
+    <h1 class="text-center"><a routerLink="/admin" class="logo"><img src="{{URL + '/logoWeb.png'}}" class="w-75"></a></h1>
+    <ul class="list-unstyled components mb-5">
+      <li [ngClass]="{'active' : path == '/admin'}">
+        <a routerLink="/admin"><span class="fa fa-home mr-3"></span> Home</a>
+      </li>
+      <li [ngClass]="{'active' : path == '/admin/account'}">
+        <a routerLink="/admin/account"><span class="fa fa-user mr-3"></span> Account</a>
+      </li>
+      <li [ngClass]="{'active' : path == '/admin/post'}">
+        <a routerLink="/admin/post"><span class="fa fa-briefcase mr-3"></span> Post</a>
+      </li>
+      <li [ngClass]="{'active' : path == '/admin/project'}">
+        <a routerLink="/admin/project"><span class="fa fa-sticky-note mr-3"></span> Project</a>
+      </li>
+      <li [ngClass]="{'active' : path == '/admin/type-house'}">
+        <a routerLink="/admin/type-house"><span class="fa fa-paper-plane mr-3"></span> Type House</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>

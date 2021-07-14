@@ -1,0 +1,105 @@
+<div class="w-100 bg-light" style="margin-top: 70px; height: 500px">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="20000">
+        <img src="{{URL + '/slide1.jpg'}}" class="w-100" style="height: 500px" alt="a">
+      </div>
+      <div class="carousel-item" data-bs-interval="20000">
+        <img src="{{URL + '/slide2.png'}}" class="w-100" style="height: 500px" alt="b">
+      </div>
+      <div class="carousel-item" data-bs-interval="20000">
+        <img src="{{URL + '/slide3.jpg'}}" class="w-100" style="height: 500px" alt="c">
+      </div>
+    </div>
+    <div class="position-absolute searchSlide">
+      <div class="input-group mb-3">
+        <select class="input-group-text">
+          <option>Chọn Loại nhà đất</option>
+          <option>aa</option>
+        </select>
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+               placeholder="Nhập thông tin bạn muốn tìm kiếm ...">
+        <button class="input-group-text" style="border-color: #0056b3; background-color: #0056b3; color: white"><i
+          class="fa fa-search me-1" aria-hidden="true"></i> Tìm kiếm
+        </button>
+      </div>
+      <div class="row col-sm-11 float-start">
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Chọn địa điểm</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Chọn mức giá</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Diện tích</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Dự án</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="!openCloseInputSearch" class="row col-1 ms-3 float-start text-center">
+        <button class="btn btn-outline-light" (click)="openInputSearch()">Thêm</button>
+      </div>
+      <div *ngIf="openCloseInputSearch" class="row col-sm-11 float-start mt-2">
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Chọn Phường/Xã</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Chọn ĐƯờng phố</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Số phòng</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col-sm-3 select-search">
+          <select class="form-select" style="background: none;" aria-label="Default select example">
+            <option selected>Hướng nhà</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="openCloseInputSearch" class="row col-1 ms-3 float-start text-center mt-2">
+        <button class="btn btn-outline-light" (click)="openInputSearch()">Rút Gọn</button>
+      </div>
+    </div>
+  </div>
+  <div class="w-100">
+    <app-home-post-list></app-home-post-list>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="col-sm-12 h-100">
+  <div class="col-sm-12 border-top py-3">
+    <div class="col-sm-12 fs-5">
+      <button class="btn btn-primary mx-2" style="background-color: #494ca2; border-color: #494ca2"
+              (click)="openDiaLog()">
+        <i class="fa fa-plus" aria-hidden="true"><span class="ms-2">Add</span></i>
+      </button>
+      <i></i>
+    </div>
+  </div>
+  <div class="col-sm-12 border-top p-3">
+    <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tiêu đề bài đăng</th>
+        <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Giá</th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} VNĐ</td>
+      </ng-container>
+      <ng-container matColumnDef="area">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Diện tích</th>
+        <td mat-cell *matCellDef="let element"> {{element.area}} m<sup>2</sup></td>
+      </ng-container>
+      <ng-container matColumnDef="typeHouse">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Loại nhà đất</th>
+        <td mat-cell *matCellDef="let element"> {{element.typeHouse.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="project">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Dự án</th>
+        <td mat-cell *matCellDef="let element"> {{element.project.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Địa chỉ</th>
+        <td mat-cell
+            *matCellDef="let element"> {{element.address + ' ,' + element.ward._name + ' ,'
+        + element.ward.district._name + ' ,' + element.ward.city._name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
+        <td mat-cell *matCellDef="let element" style="font-size: 17px">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          <i class="fa fa-unlock-alt" style="margin-left: 5px" aria-hidden="true"></i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

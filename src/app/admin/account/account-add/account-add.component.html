@@ -1,0 +1,183 @@
+<h1 mat-dialog-title>Thêm Tài Khoản</h1>
+<div mat-dialog-content style="min-height: 500px">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="formUser" label="Information user">
+      <form [formGroup]="formUser">
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Họ và Tên</mat-label>
+          <input matInput placeholder="Họ và Tên" formControlName="name">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.name.hasError('required')">
+            Họ và Tên thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Giới tính</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="nam">Nam</mat-option>
+            <mat-option value="nu">Nữ</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.gender.hasError('required')">
+            Giới tính thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 ms-5 my-2">
+          <mat-label>Số điện thoại</mat-label>
+          <input matInput placeholder="Số điện thoại" formControlName="phone">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.phone.hasError('required')">
+            Số điện thoại <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-4 ms-4 my-2">
+          <mat-label>Cmnd(Cccd)</mat-label>
+          <input matInput placeholder="Cmnd(Cccd)" formControlName="cardId">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.cardId.hasError('required')">
+            Cmnd(Cccd) thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 ms-4 my-2">
+          <mat-label>Ngày sinh</mat-label>
+          <input matInput placeholder="Ngày sinh" formControlName="age" type="date">
+          <mat-hint>Nơi lỗi xuất hiện ngay!!</mat-hint>
+          <mat-error *ngIf="formUser.controls.age.hasError('required')">
+            Ngày sinh thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Thành phố(Tỉnh)</mat-label>
+          <mat-select>
+            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">
+              <input matInput (input)="searchCity($event)">
+            </div>
+            <mat-option *ngFor="let city of cityList" [value]="city.id"
+                        (click)="getDistrict(city.id)">{{city._name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Quận(Huyện)</mat-label>
+          <mat-select>
+            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">
+              <input matInput (input)="searchDistrict($event)">
+            </div>
+            <mat-option *ngFor="let district of districtList" [value]="district.id"
+                        (click)="getWardAndStreet(district.id)">{{district._name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Phường(Xã)</mat-label>
+          <mat-select formControlName="ward">
+            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">
+              <input matInput (input)="searchWard($event)">
+            </div>
+            <mat-option *ngFor="let ward of wardList" [value]="ward">{{ward._name}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.wardId.hasError('required')">
+            Phường(Xã) <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Số nhà</mat-label>
+          <input matInput placeholder="Số nhà" formControlName="houseNumber">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.houseNumber.hasError('required')">
+            Số nhà thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Đường</mat-label>
+          <mat-select formControlName="street">
+            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">
+              <input matInput (input)="searchStreet($event)">
+            </div>
+            <mat-option *ngFor="let street of streetList" [value]="street">{{street._name}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.street.hasError('required')">
+            Đường thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="mt-3">
+          <button mat-button matStepperNext [disabled]="!formUser.controls.street.valid">Tiếp tục</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="formUser" label="Image Account">
+      <form [formGroup]="formUser">
+        <div class="col-sm-5 formatSizeFile float-start" [style]="styleShowImg">
+          <label class="clickFile" for="imgAccount">Choose file</label>
+          <input id="imgAccount" placeholder="Ảnh" type="file" hidden (input)="fileChangeEvent($event)" accept="image/png, image/jpeg">
+          <div class="col-sm-12">
+            <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 4"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+            ></image-cropper>
+          </div>
+        </div>
+        <div class="col-sm-5 ms-5 float-start">
+          <img class="w-100 h-100" [src]="croppedImage">
+        </div>
+        <div class="pt-3" style="clear: both">
+          <button mat-button matStepperPrevious>Trở lại</button>
+          <button mat-button matStepperNext>Tiếp tục
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="formUser" label="Information Account">
+      <form [formGroup]="formUser">
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Tên tài khoản</mat-label>
+          <input matInput placeholder="Tên tài khoản" formControlName="login" pattern="[a-z0-9]{5,}">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.login.hasError('required')">
+            Tên tài khoản thì <strong>trống</strong>
+          </mat-error>
+          <mat-error *ngIf="formUser.controls.login.hasError('pattern')">
+            Tên tài khoản thì <strong>có 5 kí tự trở lên</strong>. Gồm: chữ và số. Ví dụ: abc12
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5  ms-5 my-2">
+          <mat-label>Mật khẩu</mat-label>
+          <input matInput formControlName="password" placeholder="Mật khẩu" [type]="hide ? 'password' : 'text'"
+                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="formUser.controls.password.hasError('required')">
+            Mật khẩu thì <strong>trống</strong>
+          </mat-error>
+          <mat-error *ngIf="formUser.controls.password.hasError('pattern')">
+            Mật khẩu thì <strong>có 8 kí tự trở lên</strong>. Gồm: ít nhất 1 chữ Hoa, 1 chữ thường, 1 số, 1 kí tự đặc biệt. Ví dụ: Abc@1234
+          </mat-error>
+        </mat-form-field>
+        <div class="mt-3">
+          <button mat-button matStepperPrevious>Trở lại</button>
+          <button mat-button matStepperNext
+                  [disabled]="!formUser.controls.login.valid || !formUser.controls.password.valid">Tiếp tục
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Hoàn thành</ng-template>
+      <p *ngIf="formUser.valid">Bạn đã hoàn thành nhập thông tin</p>
+      <p *ngIf="!formUser.valid">Bạn chưa hoàn thành nhập thông tin</p>
+      <div class="mt-3">
+        <button mat-button matStepperPrevious>Trở lại</button>
+        <button mat-button (click)="submitForm()">Hoàn tất</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+<div class="float-end" mat-dialog-actions>
+  <button mat-button mat-dialog-close>Hủy & Đóng</button>
+</div>

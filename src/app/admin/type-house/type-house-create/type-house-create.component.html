@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content style="min-height: 50px">
+  <form [formGroup]="typeHouseForm">
+    <mat-form-field class="col-sm-11 ms-5 my-2">
+      <mat-label>Tên loại Nhà Đất</mat-label>
+      <input matInput placeholder="Tên Dự Án" formControlName="name" (change)="checkDuplicateName($event)">
+      <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+      <mat-error *ngIf="typeHouseForm.controls.name.hasError('required')">
+        Tên Dự Án thì <strong>trống</strong>
+      </mat-error>
+      <mat-error *ngIf="!checkName && !typeHouseForm.controls.name.hasError('required')">
+        Tên Dự Án đã được <strong>sử dụng</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div class="float-end" mat-dialog-actions>
+  <button mat-button mat-dialog-close>Hủy & Đóng</button>
+  <button mat-button (click)="submitForm()" [disabled]="!typeHouseForm.valid">Hoàn tất</button>
+</div>

@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content style="min-height: 500px">
+  <form [formGroup]="projectForm">
+    <mat-form-field class="col-sm-11 ms-5 my-2">
+      <mat-label>Tên Dự Án</mat-label>
+      <input matInput placeholder="Tên Dự Án" formControlName="name">
+      <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+      <mat-error *ngIf="projectForm.controls.name.hasError('required')">
+        Tên Dự Án thì <strong>trống</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-sm-11 ms-5 my-2">
+      <mat-label>Đơn vị Phân Phối</mat-label>
+      <input matInput placeholder="Đơn vị Phân Phối" formControlName="manager">
+      <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+      <mat-error *ngIf="projectForm.controls.manager.hasError('required')">
+        Đơn vị Phân Phối thì <strong>trống</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-sm-11 ms-5 my-2">
+      <mat-label>Quy Mô</mat-label>
+      <input matInput placeholder="Quy Mô" formControlName="scale">
+      <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+      <mat-error *ngIf="projectForm.controls.scale.hasError('required')">
+        Quy Mô thì <strong>trống</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="col-sm-11 ms-5 my-2">
+      <angular-editor formControlName="description"></angular-editor>
+    </div>
+  </form>
+</div>
+<div class="float-end" mat-dialog-actions>
+  <button mat-button mat-dialog-close>Hủy & Đóng</button>
+  <button mat-button (click)="submitForm()" [disabled]="!projectForm.valid">Hoàn tất</button>
+</div>

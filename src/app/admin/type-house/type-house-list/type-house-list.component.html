@@ -1,0 +1,44 @@
+<div class="col-sm-12 h-100">
+  <div class="col-sm-12 border-top py-3">
+    <div class="col-sm-12 fs-5">
+      <button class="btn btn-primary mx-2" style="background-color: #494ca2; border-color: #494ca2" (click)="openDiaLog()">
+        <i class="fa fa-plus" aria-hidden="true"><span class="ms-2">Add</span></i>
+      </button>
+      <i></i>
+    </div>
+  </div>
+  <div class="col-sm-12 border-top p-3">
+    <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+        <td mat-cell *matCellDef="let index = index"> {{index + 1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên Loại Nhà Đất </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="deleteFlag">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Trang Thái </th>
+        <td mat-cell *matCellDef="let element">
+          <i *ngIf="element.deleteFlag" class="fa fa-unlock ms-3" aria-hidden="true"></i>
+          <i *ngIf="!element.deleteFlag" class="fa fa-lock ms-3" aria-hidden="true"></i>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let element" style="font-size: 17px">
+          <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="openDiaLogWithId(element.id)"></i>
+          <i class="fa fa-unlock-alt" style="margin-left: 5px" aria-hidden="true" (click)="openDiaLogDeleteWithId(element.id)"></i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

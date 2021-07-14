@@ -1,0 +1,246 @@
+<h1 mat-dialog-title>Thêm Tài Khoản</h1>
+<div mat-dialog-content style="min-height: 500px">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="postForm" label="Loại Bài đăng">
+      <form [formGroup]="postForm">
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Loại mua bán</mat-label>
+          <mat-select formControlName="typePurchaseId">
+            <mat-option *ngFor="let typePurchase of typePurchaseList" [value]="typePurchase.id">{{typePurchase.name}}
+              - {{typePurchase.duration}} {{typePurchase.durationType}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.typePurchaseId.hasError('required')">
+            Loại mua bán thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Loại Nhà đất</mat-label>
+          <mat-select formControlName="typeHouseId">
+            <mat-option *ngFor="let typeHouse of typeHouseList" [value]="typeHouse.id">{{typeHouse.name}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.typeHouseId.hasError('required')">
+            Loại Nhà đất thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Dự án</mat-label>
+          <mat-select formControlName="projectId">
+            <!--            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">-->
+            <!--              <input matInput >-->
+            <!--            </div>-->
+            <mat-option *ngFor="let project of projectList" [value]="project.id">{{project.name}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.projectId.hasError('required')">
+            Dự án thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Loại Bài đăng</mat-label>
+          <mat-select formControlName="typePostId">
+            <mat-option *ngFor="let typePost of typePostList" [value]="typePost.id">{{typePost.name}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.typePostId.hasError('required')">
+            Loại Bài đăng thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Tiện ích ở gần</mat-label>
+          <mat-select formControlName="utilityIdList" multiple>
+            <!--            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">-->
+            <!--              <input matInput >-->
+            <!--            </div>-->
+            <mat-option *ngFor="let utility of utilities" [value]="utility.id">{{utility.name}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.typePostId.hasError('required')">
+            Loại Bài đăng thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="mt-3">
+          <button mat-button matStepperNext>Tiếp tục</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="postForm" label="Information Post">
+      <form [formGroup]="postForm">
+        <mat-form-field class="col-sm-11 ms-5 my-2">
+          <mat-label>Tiêu đề bài đăng</mat-label>
+          <input matInput placeholder="Tiêu đề bài đăng" formControlName="subject">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.subject.hasError('required')">
+            Tiêu đề bài đăng thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-11 ms-5 my-2">
+          <mat-label>Tiêu đề phụ</mat-label>
+          <input matInput placeholder="Tiêu đề phụ" formControlName="subjectChild">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.subjectChild.hasError('required')">
+            Tiêu đề phụ thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Giá</mat-label>
+          <input matInput placeholder="Giá" formControlName="price">
+          <span matSuffix>VNĐ</span>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.price.hasError('required')">
+            Giá thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Diện tich</mat-label>
+          <input matInput placeholder="Diện tích" formControlName="area">
+          <span matSuffix>/m<sup>2</sup></span>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.area.hasError('required')">
+            Diện tích thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 ms-5 my-2"
+                        *ngIf="!['Bán đất', 'Đất nền dự án'].includes(postForm.controls.typeHouseId.value.name)">
+          <mat-label>Số phòng ngủ</mat-label>
+          <input matInput placeholder="Số phòng ngủ" formControlName="bedroomNumber">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.bedroomNumber.hasError('required')">
+            Số phòng ngủ thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-4 ms-4 my-2"
+                        *ngIf="!['Bán đất', 'Đất nền dự án'].includes(postForm.controls.typeHouseId.value.name)">
+          <mat-label>Số nhà vệ sinh</mat-label>
+          <input matInput placeholder="Số nhà vệ sinh" formControlName="wcNumber">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.wcNumber.hasError('required')">
+            Số nhà vệ sinh thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 ms-4 my-2"
+                        *ngIf="!['Bán đất', 'Đất nền dự án', 'Căn hộ chung cư'].includes(postForm.controls.typeHouseId.value.name)">
+          <mat-label>Số tầng</mat-label>
+          <input matInput placeholder="Số tầng" formControlName="floorNumber">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.floorNumber.hasError('required')">
+            Số tầng thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 ms-4 my-2" *ngIf="postForm.controls.typeHouseId.value.name == 'Căn hộ chung cư'">
+          <mat-label>Tầng</mat-label>
+          <input matInput placeholder="Tầng" formControlName="floor">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.floor.hasError('required')">
+            Tầng thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Dịa chỉ</mat-label>
+          <input matInput placeholder="Địa chỉ" formControlName="address">
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.address.hasError('required')">
+            Địa chỉ thì <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Thành phố(Tỉnh)</mat-label>
+          <mat-select>
+            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">
+              <input matInput (input)="searchCity($event)">
+            </div>
+            <mat-option *ngFor="let city of cityList" [value]="city.id"
+                        (click)="getDistrict(city.id)">{{city._name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Quận(Huyện)</mat-label>
+          <mat-select>
+            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">
+              <input matInput (input)="searchDistrict($event)">
+            </div>
+            <mat-option *ngFor="let district of districtList" [value]="district.id"
+                        (click)="getWardAndStreet(district.id)">{{district._name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-5 ms-5 my-2">
+          <mat-label>Phường(Xã)</mat-label>
+          <mat-select formControlName="wardId">
+            <div class="col-sm-12 p-2" style="border: 1px solid black; border-radius: 5px">
+              <input matInput (input)="searchWard($event)">
+            </div>
+            <mat-option *ngFor="let ward of wardList" [value]="ward.id">{{ward._name}}</mat-option>
+          </mat-select>
+          <mat-hint>Nơi lỗi xuất hiện ngay!</mat-hint>
+          <mat-error *ngIf="postForm.controls.wardId.hasError('required')">
+            Phường(Xã) <strong>trống</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-11 ms-5 my-2">
+          <mat-label>Khuyến mãi</mat-label>
+          <input matInput placeholder="Khuyến mãi" formControlName="discount">
+        </mat-form-field>
+        <div class="pt-3" style="clear: both">
+          <button mat-button matStepperPrevious>Trở lại</button>
+          <button mat-button matStepperNext>Tiếp tục
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="postForm" label="Description">
+      <form [formGroup]="postForm">
+        <div class="col-sm-11 ms-5 my-2">
+          <angular-editor formControlName="description"></angular-editor>
+        </div>
+        <div class="pt-1" style="clear: both">
+          <button mat-button matStepperPrevious>Trở lại</button>
+          <button mat-button matStepperNext>Tiếp tục
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="postForm" label="Image">
+      <form [formGroup]="postForm">
+        <label for="uploadFile" class="btn btn-info">Upload file</label>
+        <input type="file" hidden multiple id="uploadFile" accept="image/png, image/jpeg" (change)="uploadFile($event)">
+        <div class="col-sm-12 d-flex image-list mt-1" style="height: 300px">
+          <div *ngFor="let img of imageList; let index = index" class="col-3 h-100 me-3"
+               style="display: inline-block; position: relative; text-align: center; align-items: center;">
+            <img src="{{img}}" style="max-height: 100%; max-width: 100%" class="rounded">
+            <i class="fa fa-times-circle position-absolute text-white bg-dark" aria-hidden="true"
+               style="top: 10px; right: 10px; border-radius: 50%; border: 1px solid black; font-size: 18px"
+               (click)="closeImgFromList(index)"></i>
+          </div>
+        </div>
+        <div class="pt-3" style="clear: both">
+          <button mat-button matStepperPrevious>Trở lại</button>
+          <button mat-button matStepperNext>Tiếp tục
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="postForm" label="Video">
+      <label for="uploadVideo" class="btn btn-info">Upload file</label>
+      <input type="file" hidden multiple id="uploadVideo" accept="video/mp4" (change)="uploadFileVideo($event)">
+      <div class="col-sm-12 d-flex image-list mt-1" style="height: 300px">
+        <div *ngFor="let video of videoList; let index = index" class="col-3 h-100 me-3"
+             style="display: inline-block; position: relative; text-align: center; align-items: center;">
+          <video controls style="max-width: 100%; max-height: 100%" class="rounded">
+            <source type="video/mp4" src="{{video}}">
+          </video>
+          <i class="fa fa-times-circle position-absolute text-white bg-dark" aria-hidden="true"
+             style="top: 10px; right: 10px; border-radius: 50%; border: 1px solid black; font-size: 18px" (click)="closeVideoFromList(index)"></i>
+        </div>
+      </div>
+      <div class="pt-3" style="clear: both">
+        <button mat-button matStepperPrevious>Trở lại</button>
+        <button mat-button [disabled]="!postForm.valid" (click)="submitForm()">Hoàn Thành
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+<div class="float-end" mat-dialog-actions>
+  <button mat-button mat-dialog-close>Hủy & Đóng</button>
+</div>

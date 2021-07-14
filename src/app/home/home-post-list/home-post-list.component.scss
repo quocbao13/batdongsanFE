@@ -1,0 +1,10 @@
+.hover-box-shadow {
+  box-shadow: 0 0 10px 5px #cccccc;
+  border-radius: 7px;
+  transition: 0.5s;
+  height: 300px;
+  &:hover {
+    transition: 0.5s;
+    box-shadow: 0 0 10px 5px #aaaaaa;
+  }
+}

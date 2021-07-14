@@ -1,0 +1,55 @@
+<div class="col-sm-12" style="margin-top: 70px">
+  <div class="mx-auto row col-sm-8">
+    <div class="col-sm-8 float-start">
+      <div *ngIf="imgList != undefined" class="col-sm-12 mt-3" style="background-color: #aaaaaa">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div *ngFor="let img of imgList; let index = index" class="carousel-item w-100 text-center"
+                 style="height: 400px"
+                 [ngClass]="{'active' : index == indexFile}" data-bs-interval="25000">
+              <img
+                *ngIf="img.url.split('.')[1] == 'jpg' || img.url.split('.')[1] == 'png' || img.url.split('.')[1] == 'jpeg'"
+                #imageElement src="{{URL + '/' + img.url}}" style="max-height: 100%; max-width: 100%; vertical-align:middle">
+              <video *ngIf="img.url.split('.')[1] == 'mp4'" controls style="max-width: 100%; max-height: 100%; vertical-align:middle">
+                <source type="video/mp4" src="{{URL + '/' + img.url}}">
+              </video>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="imgList != undefined" class="col-sm-12 mt-2 d-flex showListFile">
+        <div *ngFor="let img of imgList; let index = index" class="col-sm-3 d-inline-block me-2" style="height: 100px;"
+             (click)="changeActiveImg(index)">
+          <div class="col-sm-12 text-center" style="height: 100px;" [ngClass]="{'miniImg' : index == indexFile}">
+            <img
+              *ngIf="img.url.split('.')[1] == 'jpg' || img.url.split('.')[1] == 'png' || img.url.split('.')[1] == 'jpeg'"
+              src="{{URL + '/' + img.url}}"
+              style="min-width: 100%; min-height: 100%; max-width: 100%; max-height: 100%">
+            <video *ngIf="img.url.split('.')[1] == 'mp4'"
+                   style="min-width: 100%; min-height: 100%; max-width: 100%; max-height: 100%">
+              <source type="video/mp4" src="{{URL + '/' + img.url}}">
+            </video>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h1>
+          {{post.subject}}
+        </h1>
+      </div>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+  </div>
+</div>
